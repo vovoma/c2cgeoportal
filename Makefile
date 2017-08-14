@@ -86,7 +86,7 @@ doc: $(BUILD_DIR)/sphinx.timestamp
 
 
 .PHONY: checks
-checks: flake8 git-attributes quote spell
+checks: flake8 mypy git-attributes quote spell
 
 .PHONY: clean
 clean:
@@ -142,6 +142,11 @@ flake8:
 		--copyright-check \
 		--copyright-min-file-size=1 \
 		--copyright-regexp="Copyright \(c\) ([0-9][0-9][0-9][0-9]-)?$(shell date +%Y), Camptocamp SA"
+
+.PHONY: mypy
+mypy:
+	MYPYPATH=/usr/local/lib/python3.6/site-packages/ \
+		mypy --ignore-missing-imports --follow-imports skip c2cgeoportal
 
 .PHONY: git-attributes
 git-attributes:
