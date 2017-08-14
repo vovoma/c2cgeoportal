@@ -34,6 +34,7 @@ import os
 import yaml
 import re
 import traceback
+from typing import Dict
 from json import loads
 from urllib.parse import urlsplit
 from defusedxml.minidom import parseString
@@ -270,8 +271,8 @@ class GeoMapfishThemeExtractor(Extractor):  # pragma: no cover
 
     # Run on the development.ini file
     extensions = [".ini"]
-    featuretype_cache = {}
-    wmscap_cache = {}
+    featuretype_cache: Dict[str, Dict] = {}
+    wmscap_cache: Dict[str, WebMapService] = {}
 
     def __call__(self, filename, options):
         messages = []

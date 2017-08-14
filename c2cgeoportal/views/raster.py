@@ -29,6 +29,7 @@
 
 
 import logging
+from typing import Dict
 from decimal import Decimal
 
 from pyramid.view import view_config
@@ -43,7 +44,7 @@ log = logging.getLogger(__name__)
 class Raster:
 
     # cache of GeoRaster instances in function of the layer name
-    _rasters = {}
+    _rasters: Dict[str, GeoRaster] = {}
 
     def __init__(self, request):
         self.request = request

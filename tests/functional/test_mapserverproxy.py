@@ -58,6 +58,7 @@
 #
 
 import hashlib
+import typing
 from unittest2 import TestCase
 
 from sqlalchemy import Column, types
@@ -71,6 +72,8 @@ from tests.functional import (  # noqa
     setup_common as setup_module,
     create_dummy_request, mapserv_url, create_default_ogcserver, cleanup_db
 )
+
+Base: typing.Any = sqlahelper.get_base()
 
 # GetMap hash for MapServer 6.0 and 7.0
 FOUR_POINTS = ["61cbb0a6d18b72e4a28c1087019de245", "e2fe30a8085b0db4040c9ad0d331b6b8"]

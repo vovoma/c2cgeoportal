@@ -31,13 +31,14 @@
 # file taken from http://indiemaps.com/blog/2008/03/easy-shapefile-loading-in-python/
 
 import math
+from typing import List
 
 from struct import unpack
 from . import dbfutils
 
 
 XY_POINT_RECORD_LENGTH = 16
-db = []
+db: List[List] = []
 
 
 def load_shapefile(file_name):
