@@ -1,5 +1,8 @@
 BUILD_DIR?=.build
 VENV?=${BUILD_DIR}/venv
+GIT_HASH := $(shell git rev-parse HEAD)
+DOCKER_BASE = camptocamp/c2cgeoportal
+DOCKER_TAG ?= latest
 
 .PHONY: build
 build: ${BUILD_DIR}/requirements.timestamp
@@ -48,3 +51,12 @@ ${BUILD_DIR}/requirements-dev.timestamp: ${BUILD_DIR}/venv.timestamp setup.py
 	#Install the project in editable mode with its testing requirements.
 	${VENV}/bin/pip install -e ".[testing]"
 	touch $@
+
+.PHONY: build_admin
+build_admin:
+	docker build -t $(DOCKER_BASE)_admin:$(DOCKER_TAG) --build-arg "GIT_HASH=$(GIT_HASH)" .
+
+.PHONY: pull
+pull:
+	for image in `find -name Dockerfile | xargs grep --no-filename FROM | awk '{print $$2}' | sort -u`; do docker pull $$image; done
+	for image in `find -name "docker-compose*.yml" | xargs grep --no-filename "image:" | awk '{print $$2}' | sort -u | grep -v $(DOCKER_BASE) | grep -v rancher`; do docker pull $$image; done
