@@ -1,6 +1,7 @@
 import pytest
 from pyramid.testing import DummyRequest
 
+
 @pytest.fixture(scope='class')
 @pytest.mark.usefixtures("dbsession")
 def insertUsersTestData(dbsession):
@@ -10,6 +11,7 @@ def insertUsersTestData(dbsession):
     dbsession.add(user)
     yield
     dbsession.rollback()
+
 
 @pytest.mark.usefixtures("insertUsersTestData", "transact")
 class TestUser():
@@ -29,3 +31,4 @@ class TestUser():
     def test_commit_in_app_rollbacked(self, dbsession, test_app):
         res = test_app.get('/users_nb', status=200)
         assert "['users len is: 1', <br/>, 'first is: babar', <br/>, 'projetc is: c2cgeoportal_admin', <br/>]" == str(res.html.contents), 'what a beautifull soup !'
+
