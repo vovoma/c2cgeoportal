@@ -1,1 +1,13 @@
 -e git://github.com/camptocamp/c2cgeoform.git#egg=c2cgeoform
+plaster_pastedeploy
+psycopg2
+pyramid_jinja2
+pyramid_retry
+pyramid_tm
+SQLAlchemy
+transaction
+zope.sqlalchemy
+#waitress
+pyproj
+ColanderAlchemy>=0.3.2
+deform
