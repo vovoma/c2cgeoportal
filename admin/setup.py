@@ -9,20 +9,7 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
-    'plaster_pastedeploy',
-    'psycopg2',
-    'pyramid >= 1.9a',
-    'pyramid_debugtoolbar',
-    'pyramid_jinja2',
-    'pyramid_retry',
-    'pyramid_tm',
-    'SQLAlchemy',
-    'transaction',
-    'zope.sqlalchemy',
-    'waitress',
-    'pyproj',  # sudo apt install python3-dev", why not with c2cgeoform ?
-    'ColanderAlchemy>=0.3.2'  # why not with c2cgeoform ?
-    'deform'
+    'pyramid == 1.9.1',
 ]
 
 tests_require = [
