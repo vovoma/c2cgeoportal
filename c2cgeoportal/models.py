@@ -132,7 +132,7 @@ class FullTextSearch(GeoInterface, Base):
 
 class Functionality(Base):
     __tablename__ = "functionality"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -294,7 +294,7 @@ class User(Base):
 
 class Role(Base):
     __tablename__ = "role"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -375,7 +375,7 @@ event.listen(TreeItem, "after_delete", cache_invalidate_cb, propagate=True)
 
 class TreeGroup(TreeItem):
     __tablename__ = "treegroup"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [DENY_ALL]
 
     id = Column(
@@ -415,7 +415,7 @@ class TreeGroup(TreeItem):
 # association table LayerGroup <> TreeItem
 class LayergroupTreeitem(Base):
     __tablename__ = "layergroup_treeitem"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -460,7 +460,7 @@ event.listen(LayergroupTreeitem, "after_delete", cache_invalidate_cb, propagate=
 
 class LayerGroup(TreeGroup):
     __tablename__ = "layergroup"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -499,7 +499,7 @@ restricted_role_theme = Table(
 
 class Theme(TreeGroup):
     __tablename__ = "theme"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -536,7 +536,7 @@ event.listen(Theme.functionalities, "remove", cache_invalidate_cb)
 
 class Layer(TreeItem):
     __tablename__ = "layer"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [DENY_ALL]
 
     id = Column(
@@ -557,7 +557,7 @@ class DimensionLayer(Layer):
 
 class LayerV1(Layer):  # Deprecated in v2
     __tablename__ = "layerv1"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -631,7 +631,7 @@ OGCSERVER_AUTH_GEOSERVER = "Geoserver auth"
 
 class OGCServer(Base):
     __tablename__ = "ogc_server"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -683,7 +683,7 @@ class OGCServer(Base):
 
 class LayerWMS(DimensionLayer):
     __tablename__ = "layer_wms"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -725,7 +725,7 @@ class LayerWMS(DimensionLayer):
 
 class LayerWMTS(DimensionLayer):
     __tablename__ = "layer_wmts"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -779,7 +779,7 @@ layer_ra = Table(
 
 class RestrictionArea(Base):
     __tablename__ = "restrictionarea"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -853,7 +853,7 @@ interface_theme = Table(
 
 class Interface(Base):
     __tablename__ = "interface"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -882,7 +882,7 @@ class Interface(Base):
 
 class Metadata(Base):
     __tablename__ = "metadata"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -919,7 +919,7 @@ event.listen(Metadata, "after_delete", cache_invalidate_cb, propagate=True)
 
 class Dimension(Base):
     __tablename__ = "dimension"
-    __table_args__ = ((), {"schema": _schema})
+    __table_args__ = (None, {"schema": _schema})
     __acl__ = [
         (Allow, AUTHORIZED_ROLE, ALL_PERMISSIONS),
     ]
@@ -953,7 +953,7 @@ class Dimension(Base):
 
 class Shorturl(Base):
     __tablename__ = "shorturl"
-    __table_args__ = ((), {"schema": _schema + "_static"})
+    __table_args__ = (None, {"schema": _schema + "_static"})
     __acl__ = [DENY_ALL]
     id = Column(Integer, primary_key=True)
     url = Column(Unicode)
