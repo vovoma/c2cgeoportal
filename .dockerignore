@@ -2,6 +2,8 @@
 !c2cgeoportal/
 !setup.py
 !README.rst
+!commons
+!admin
 !Makefile
 !vars.yaml
 !lingua.cfg

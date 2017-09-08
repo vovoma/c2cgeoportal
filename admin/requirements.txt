@@ -1,4 +1,5 @@
 -e git://github.com/camptocamp/c2cgeoform.git#egg=c2cgeoform
+-e ../commons
 plaster_pastedeploy
 psycopg2
 pyramid_jinja2
