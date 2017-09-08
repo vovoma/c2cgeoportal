@@ -46,3 +46,4 @@ class UserViews(AbstractViews):
     @view_config(route_name='c2cgeoform_action', request_method='POST', renderer="c2cgeoform:templates/site/edit.pt")
     def save(self):
         return super().save()
+
