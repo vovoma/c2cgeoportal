@@ -27,12 +27,8 @@ git remote add origin . # add a fake remote
 
 # Minimal build
 ./docker-run make -f travis.mk \
-    /build/requirements.timestamp \
-    alembic.ini alembic_static.ini \
-    production.ini \
-    config.yaml \
     docker-compose-build.yaml \
-    wsgi-docker mapserver-docker print-docker testdb-docker
+    geoportal-docker mapserver-docker print-docker testdb-docker
 # Wait DB
 ./docker-compose-run sleep 15
 # Create default theme

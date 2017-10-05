@@ -1,19 +1,18 @@
 from setuptools import setup
 
-version = "0.1.0"
 readme = open('README.md').read()
 
 setup(
     name="c2cgeoportal_commons",
+    version="2.3.0.dev0",
     packages=["c2cgeoportal_commons"],
-    version=version,
     description="c2cgeoportal commons",
     long_description=readme,
     include_package_data=True,
     author="Camptocamp",
     author_email="info@camptocamp.com",
     install_requires=[
-        "sqlahelper",
+        "c2cgeoform",
         "papyrus",
         'lingua>=2.4',
         'babel',

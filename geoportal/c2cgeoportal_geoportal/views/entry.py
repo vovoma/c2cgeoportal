@@ -50,17 +50,17 @@ from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
 from owslib.wms import WebMapService
 
-from c2cgeoportal.lib import get_setting, get_protected_layers_query, \
+from c2cgeoportal_geoportal.lib import get_setting, get_protected_layers_query, \
     get_url2, get_url, get_typed, get_types_map, add_url_params
-from c2cgeoportal.lib.cacheversion import get_cache_version
-from c2cgeoportal.lib.caching import get_region, invalidate_region,  \
+from c2cgeoportal_geoportal.lib.cacheversion import get_cache_version
+from c2cgeoportal_geoportal.lib.caching import get_region, invalidate_region,  \
     set_common_headers, NO_CACHE, PUBLIC_CACHE, PRIVATE_CACHE
-from c2cgeoportal.lib.functionality import get_functionality, \
+from c2cgeoportal_geoportal.lib.functionality import get_functionality, \
     get_mapserver_substitution_params
-from c2cgeoportal.lib.wmstparsing import parse_extent, TimeInformation
-from c2cgeoportal.lib.email_ import send_email
-from c2cgeoportal import models
-from c2cgeoportal.views.layers import get_layer_metadatas
+from c2cgeoportal_geoportal.lib.wmstparsing import parse_extent, TimeInformation
+from c2cgeoportal_geoportal.lib.email_ import send_email
+from c2cgeoportal_geoportal import models
+from c2cgeoportal_geoportal.views.layers import get_layer_metadatas
 
 _ = TranslationStringFactory("c2cgeoportal")
 log = logging.getLogger(__name__)

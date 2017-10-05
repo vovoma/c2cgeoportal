@@ -31,8 +31,8 @@
 from unittest import TestCase
 from pyramid import testing
 
-import c2cgeoportal
-from c2cgeoportal.pyramid_ import call_hook, set_user_validator, \
+import c2cgeoportal_geoportal
+from c2cgeoportal_geoportal import call_hook, set_user_validator, \
     default_user_validator, create_get_user_from_request, _match_url_start
 
 
@@ -53,21 +53,21 @@ class TestIncludeme(TestCase):
             })
 
     def test_set_user_validator_directive(self):
-        self.config.include(c2cgeoportal.includeme)
+        self.config.include(c2cgeoportal_geoportal.includeme)
         self.assertTrue(
             self.config.set_user_validator.__func__.__docobj__ is
             set_user_validator
         )
 
     def test_default_user_validator(self):
-        self.config.include(c2cgeoportal.includeme)
+        self.config.include(c2cgeoportal_geoportal.includeme)
         self.assertEqual(
             self.config.registry.validate_user,
             default_user_validator
         )
 
     def test_user_validator_overwrite(self):
-        self.config.include(c2cgeoportal.includeme)
+        self.config.include(c2cgeoportal_geoportal.includeme)
 
         def custom_validator(username, password):
             return False  # pragma: no cover
@@ -142,7 +142,7 @@ class TestHooks(TestCase):
     settings = {
         "hooks": {
             "test": "tests.test_init.hook",
-            "bad": "c2cgeoportal.not_here"
+            "bad": "c2cgeoportal_geoportal.not_here"
         }
     }
 
@@ -164,7 +164,7 @@ class TestHooks(TestCase):
 
 class TestInit(TestCase):
     def test_add_url_params(self):
-        from c2cgeoportal.lib import add_url_params
+        from c2cgeoportal_geoportal.lib import add_url_params
         from urllib.parse import urlparse, parse_qs
         params = {"Name": "Bob", "Age": 18, "Nationality": "Việt Nam"}
         result = add_url_params("http://test/", params)

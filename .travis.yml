@@ -50,7 +50,8 @@ install:
 - if [ ${TRAVIS_PULL_REQUEST} != "false" ] ; then git fetch origin ${TRAVIS_BRANCH}:${TRAVIS_BRANCH}; fi
 - ./docker-run travis/empty-make.sh help
 - ./docker-run make build
-- docker build --tag=camptocamp/geomapfish-build:latest .
+- docker build --tag=camptocamp/geomapfish-commons:latest commons
+- docker build --tag=camptocamp/geomapfish-build:latest geoportal
 - docker tag camptocamp/geomapfish-build:latest camptocamp/geomapfish-build:2.3
 - travis/create-new-project.sh
 - travis/run-on.sh /tmp/travis/testgeomapfish/ ./docker-run make -f travis.mk build

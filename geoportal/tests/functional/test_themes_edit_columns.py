@@ -52,7 +52,8 @@ class TestThemesEditColumns(TestCase):
         self._tables = []
 
         import transaction
-        from c2cgeoportal.models import DBSession, Role, User, Interface, TreeItem, Theme, \
+        from c2cgeoportal_commons.models import DBSession
+        from c2cgeoportal_commons.models.main import Role, User, Interface, TreeItem, Theme, \
             LayerGroup, OGCSERVER_AUTH_NOAUTH
 
         for treeitem in DBSession.query(TreeItem).all():
@@ -101,7 +102,8 @@ class TestThemesEditColumns(TestCase):
         from sqlalchemy import Column, Table, types, ForeignKey
         from sqlalchemy.ext.declarative import declarative_base
         from geoalchemy2 import Geometry
-        from c2cgeoportal.models import DBSession, RestrictionArea, LayerWMS
+        from c2cgeoportal_commons.models import DBSession
+        from c2cgeoportal_commons.models.main import RestrictionArea, LayerWMS
 
         self.__class__._table_index += 1
         id = self.__class__._table_index
@@ -210,7 +212,7 @@ class TestThemesEditColumns(TestCase):
         return request
 
     def test_themes_edit_columns(self):
-        from c2cgeoportal.views.entry import Entry
+        from c2cgeoportal_geoportal.views.entry import Entry
 
         layer_id = self._create_layer(geom_type=True)
         entry = Entry(self._get_request(layer_id, username="__test_user", params={
@@ -313,8 +315,8 @@ class TestThemesEditColumns(TestCase):
         )
 
     def test_themes_edit_columns_extras(self):
-        from c2cgeoportal.views.entry import Entry
-        from c2cgeoportal.models import Metadata
+        from c2cgeoportal_geoportal.views.entry import Entry
+        from c2cgeoportal_commons.models.main import Metadata
 
         metadatas = [
             Metadata("lastUpdateDateColumn", "last_update_date"),

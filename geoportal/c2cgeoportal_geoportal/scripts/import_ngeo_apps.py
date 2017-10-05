@@ -217,7 +217,7 @@ def main():
         if args.html:
             data = "<%\n" \
                 "from json import dumps\n" \
-                "from c2cgeoportal.lib.cacheversion import get_cache_version\n" \
+                "from c2cgeoportal_geoportal.lib.cacheversion import get_cache_version\n" \
                 "%>\n" + \
                 data
             # back for ng-app

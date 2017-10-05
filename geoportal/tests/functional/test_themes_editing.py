@@ -34,7 +34,7 @@ import transaction
 from geoalchemy2 import WKTElement
 from pyramid import testing
 
-from c2cgeoportal.lib import functionality
+from c2cgeoportal_geoportal.lib import functionality
 from tests.functional import (  # noqa
     teardown_common as teardown_module,
     setup_common as setup_module,
@@ -55,7 +55,8 @@ class TestThemeEditing(TestCase):
 
         functionality.FUNCTIONALITIES_TYPES = None
 
-        from c2cgeoportal.models import DBSession, User, Role, \
+        from c2cgeoportal_commons.models import DBSession
+        from c2cgeoportal_commons.models.main import User, Role, \
             RestrictionArea, TreeItem, Theme, LayerGroup, Interface, LayerWMS
 
         from sqlalchemy import Column, Table, types
@@ -130,7 +131,8 @@ class TestThemeEditing(TestCase):
 
         functionality.FUNCTIONALITIES_TYPES = None
 
-        from c2cgeoportal.models import DBSession, User, Role, Layer, \
+        from c2cgeoportal_commons.models import DBSession
+        from c2cgeoportal_commons.models.main import User, Role, Layer, \
             RestrictionArea, Theme, LayerGroup, Interface, OGCServer
 
         DBSession.query(User).filter(User.username == "__test_user1").delete()
@@ -170,7 +172,8 @@ class TestThemeEditing(TestCase):
     def _create_request_obj(username=None, params=None, **kwargs):
         if params is None:
             params = {}
-        from c2cgeoportal.models import DBSession, User
+        from c2cgeoportal_commons.models import DBSession
+        from c2cgeoportal_commons.models.main import User
 
         request = create_dummy_request(**kwargs)
         request.static_url = lambda url: "/dummy/static/url"
@@ -185,7 +188,7 @@ class TestThemeEditing(TestCase):
         return request
 
     def test_themev2_noauth_edit_permission(self):
-        from c2cgeoportal.views.entry import Entry
+        from c2cgeoportal_geoportal.views.entry import Entry
 
         request = self._create_request_obj()
         request.params = {
@@ -198,7 +201,7 @@ class TestThemeEditing(TestCase):
         self.assertEqual([t["name"] for t in themes["themes"]], [])
 
     def test_themev2_auth_no_edit_permission(self):
-        from c2cgeoportal.views.entry import Entry
+        from c2cgeoportal_geoportal.views.entry import Entry
 
         request = self._create_request_obj(username="__test_user1")
         request.params = {
@@ -216,7 +219,7 @@ class TestThemeEditing(TestCase):
         self.assertEqual("editable" in layers[0], False)
 
     def test_themev2_auth_edit_permission(self):
-        from c2cgeoportal.views.entry import Entry
+        from c2cgeoportal_geoportal.views.entry import Entry
 
         request = self._create_request_obj(username="__test_user2", params={
             "min_levels": "0"

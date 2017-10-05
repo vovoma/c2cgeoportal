@@ -105,7 +105,7 @@ User can be created if it does not exist yet."""
         parser.error("Cannot find config file: {0!s}".format(app_config))
 
     # loading schema name from config and setting its value to the
-    # corresponding global variable from c2cgeoportal
+    # corresponding global variable from c2cgeoportal_geoportal
 
     # Ignores pyramid deprecation warnings
     warnings.simplefilter("ignore", DeprecationWarning)
@@ -114,7 +114,7 @@ User can be created if it does not exist yet."""
     get_app(app_name, options.app_name, options=os.environ)
 
     # must be done only once we have loaded the project config
-    from c2cgeoportal import models
+    from c2cgeoportal_geoportal import models
 
     print("\n")
 

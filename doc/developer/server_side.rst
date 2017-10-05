@@ -363,7 +363,7 @@ All the static resources used sub domains by using the configurations variables:
 
 To be able to use sub domain in a view we should configure the route as this::
 
-    from c2cgeoportal.lib import MultiDomainPregenerator
+    from c2cgeoportal_geoportal.lib import MultiDomainPregenerator
     config.add_route(
         '<name>', '<path>',
         pregenerator=MultiDomainPregenerator())

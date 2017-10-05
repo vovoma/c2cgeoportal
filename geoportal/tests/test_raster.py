@@ -37,7 +37,7 @@ class TestRasterViews(TestCase):
         from decimal import Decimal
         from pyramid.testing import DummyRequest
         from pyramid.httpexceptions import HTTPNotFound
-        from c2cgeoportal.views.raster import Raster
+        from c2cgeoportal_geoportal.views.raster import Raster
 
         request = DummyRequest()
         request.registry.settings = {
@@ -76,7 +76,7 @@ class TestRasterViews(TestCase):
         self.assertRaises(HTTPNotFound, raster.raster)
 
     def test_absolute_path(self):
-        from c2cgeoportal.lib.raster.georaster import GeoRaster
+        from c2cgeoportal_geoportal.lib.raster.georaster import GeoRaster
         gr = GeoRaster("/src/tests/data/dem_absolute.shp")
         tile = gr._get_tile(548000, 216000)
         self.assertEqual(
@@ -87,7 +87,7 @@ class TestRasterViews(TestCase):
         from decimal import Decimal
         from pyramid.testing import DummyRequest
         from pyramid.httpexceptions import HTTPNotFound
-        from c2cgeoportal.views.profile import Profile
+        from c2cgeoportal_geoportal.views.profile import Profile
 
         request = DummyRequest()
         request.registry.settings = {
@@ -186,7 +186,7 @@ class TestRasterViews(TestCase):
 
     def test_profile_csv(self):
         from pyramid.testing import DummyRequest
-        from c2cgeoportal.views.profile import Profile
+        from c2cgeoportal_geoportal.views.profile import Profile
 
         request = DummyRequest()
         request.registry.settings = {

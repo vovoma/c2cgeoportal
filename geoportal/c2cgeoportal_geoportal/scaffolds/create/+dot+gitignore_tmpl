@@ -1,7 +1,7 @@
 *.pyc
 /ngeo
 /jsbuild/app.cfg
-/{{package}}/static/lib/cgxp/
+/geoportal/{{package}}_geoportal/static/lib/cgxp/
 /node_modules
 /docker-compose.yml
 /alembic.ini
@@ -9,7 +9,7 @@
 /development.ini
 /production.ini
 /project.yaml
-/config.yaml
+/geoportal/config.yaml
 /.SUCCESS
 /Dockerfile
 /docker-compose.yaml
@@ -26,10 +26,10 @@
 /testdb/11-schemas.sql
 /testdb/12-alembic.sql
 /testdb/13-alembic-static.sql
-/{{package}}.egg-info
-/{{package}}/locale/*/LC_MESSAGES/*.mo
-/{{package}}/locale/{{package}}-*.pot
-/{{package}}/static-ngeo/build/
-/{{package}}/static-ngeo/fonts/gmf-icons.*
-/{{package}}/static-ngeo/fonts/fontawesome-webfont.*
-/{{package}}/static/build/
+/*.egg-info
+/geoportal/{{package}}_geoportal/locale/*/LC_MESSAGES/*.mo
+/geoportal/{{package}}_geoportal/locale/{{package}}-*.pot
+/geoportal/{{package}}_geoportal/static-ngeo/build/
+/geoportal/{{package}}_geoportal/static-ngeo/fonts/gmf-icons.*
+/geoportal/{{package}}_geoportal/static-ngeo/fonts/fontawesome-webfont.*
+/geoportal/{{package}}_geoportal/static/build/

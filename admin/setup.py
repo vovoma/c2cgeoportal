@@ -7,6 +7,7 @@ with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
 requires = [
+    'c2cgeoportal_commons',
     'plaster_pastedeploy',
     'psycopg2',
     'pyramid >= 1.9a',
@@ -30,7 +31,7 @@ tests_require = [
 
 setup(
     name='c2cgeoportal_admin',
-    version='0.0',
+    version='2.3.0.dev0',
     description='c2cgeoportal_admin',
     long_description=README,
     classifiers=[

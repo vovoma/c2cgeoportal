@@ -43,7 +43,7 @@ from subprocess import check_call, check_output
 from argparse import ArgumentParser
 from alembic.config import Config
 from alembic import command
-from c2cgeoportal.lib.bashcolor import colorize, GREEN, YELLOW, RED
+from c2cgeoportal_geoportal.lib.bashcolor import colorize, GREEN, YELLOW, RED
 
 REQUIRED_TEMPLATE_KEYS = ["package", "srid", "extent"]
 TEMPLATE_EXAMPLE = {
@@ -625,7 +625,7 @@ class C2cUpgradeTool:
     @Step(12)
     def step12(self, _):
         check_call(["git", "commit", "-m", "Upgrade to GeoMapFish {}".format(
-            pkg_resources.get_distribution("c2cgeoportal").version
+            pkg_resources.get_distribution('c2cgeoportal_commons").version
         )])
 
         print("")
