@@ -130,7 +130,8 @@ def _fts(settings, health_check):
 
 
 def _themes_errors(settings, health_check):
-    from c2cgeoportal.models import DBSession, Interface
+    from c2cgeoportal_commons.models import DBSession
+    from c2cgeoportal_commons.models.main import Interface
 
     themes_settings = settings["themes"]
     default_params = themes_settings.get("params", {})

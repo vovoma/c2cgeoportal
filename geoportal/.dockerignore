@@ -1,8 +1,5 @@
 *
-!c2cgeoportal/
+!c2cgeoportal_geoportal/
 !setup.py
-!README.rst
-!Makefile
-!vars.yaml
-!lingua.cfg
-!.tx
+!package.json
+!MANIFEST.in
