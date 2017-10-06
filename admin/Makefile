@@ -2,11 +2,12 @@ BUILD_DIR?=.build
 VENV?=${BUILD_DIR}/venv
 
 .PHONY: build
-build: ${BUILD_DIR}/requirements.timestamp
+build: ${BUILD_DIR}/requirements.timestamp node_modules
 
 .PHONY: cleanall
 cleanall:
 	rm -rf ${BUILD_DIR}
+	rm -rf node_modules
 
 .PHONY: test
 test: ${BUILD_DIR}/requirements.timestamp ${BUILD_DIR}/requirements-dev.timestamp
@@ -26,9 +27,9 @@ init_db:
 	${VENV}/bin/initialize_db_main development.ini
 
 .PHONY: serve
-serve: ${BUILD_DIR}/requirements.timestamp
+serve: ${BUILD_DIR}/requirements.timestamp node_modules
 	#Run your project.
-	${VENV}/bin/pserve development.ini
+	${VENV}/bin/pserve --reload development.ini
 
 ${BUILD_DIR}/venv.timestamp:
 	#Create a Python virtual environment.
@@ -48,3 +49,7 @@ ${BUILD_DIR}/requirements-dev.timestamp: ${BUILD_DIR}/venv.timestamp setup.py
 	#Install the project in editable mode with its testing requirements.
 	${VENV}/bin/pip install -e ".[testing]"
 	touch $@
+
+.PHONY: node_modules
+node_modules: package.json
+	npm install
