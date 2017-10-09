@@ -102,6 +102,9 @@ def init_dbsessions(settings, config=None, health_check=None):
     srid = settings["srid"]
     schema = settings["schema"]
 
+    print(c2cgeoportal_commons.models.srid)
+    print(c2cgeoportal_commons.models.schema)
+
     from c2cgeoportal_geoportal import models
 
     db_chooser = settings.get("db_chooser", {})
