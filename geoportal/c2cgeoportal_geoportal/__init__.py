@@ -59,12 +59,6 @@ log = logging.getLogger(__name__)
 
 # used by (sql|form)alchemy
 
-global srid
-global schema
-
-srid = None
-schema = None
-
 # Header predicate to accept only JSON content
 # OL/cgxp are not setting the correct content type for JSON. We have to accept
 # XML as well even though JSON is actually send.

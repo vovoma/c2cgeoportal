@@ -97,8 +97,10 @@ def generate_mappers(settings):
 
 def init_dbsessions(settings, config=None, health_check=None):
     # define the srid, schema as global variables to be usable in the model
-    c2cgeoportal_commons.models.srid = settings["srid"]
-    c2cgeoportal_commons.models.schema = settings["schema"]
+    global schema
+    global srid
+    srid = settings["srid"]
+    schema = settings["schema"]
 
     from c2cgeoportal_geoportal import models
 
