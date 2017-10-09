@@ -38,7 +38,6 @@ from socket import gethostbyname, gaierror
 from ipcalc import IP, Network
 from Crypto.Cipher import AES
 import importlib
-import re
 
 from pyramid_mako import add_mako_renderer
 from pyramid.interfaces import IStaticURLInfo
@@ -51,7 +50,7 @@ import c2cwsgiutils.db
 import c2cwsgiutils.pyramid
 from c2cwsgiutils.health_check import HealthCheck
 
-import c2cgeoportal_geoportal
+from c2cgeoportal_commons.modules import init_dbsessions
 from c2cgeoportal_geoportal.lib import dbreflection, caching, \
     C2CPregenerator, MultiDomainStaticURLInfo
 
@@ -488,6 +487,9 @@ def includeme(config):
     # Initialise DBSessions
     init_dbsessions(settings, config, health_check)
 
+    # initialize the dbreflection module
+    dbreflection.init()
+
     from c2cgeoportal_geoportal.lib import checker, check_collector
     checker.init(config, health_check)
     check_collector.init(config, health_check)
@@ -696,38 +698,3 @@ def includeme(config):
     # Handles the other HTTP errors raised by the views. Without that,
     # the client receives a status=200 without content.
     config.add_view(error_handler, context=HTTPException)
-
-
-def init_dbsessions(settings, config=None, health_check=None):
-    # define the srid, schema as global variables to be usable in the model
-    c2cgeoportal_geoportal.srid = settings["srid"]
-    c2cgeoportal_geoportal.schema = settings["schema"]
-
-    from c2cgeoportal_commons import models
-    from c2cgeoportal_commons.models import main
-
-    db_chooser = settings.get("db_chooser", {})
-    master_paths = [re.compile(i.replace("//", "/")) for i in db_chooser.get("master", [])]
-    slave_paths = [re.compile(i.replace("//", "/")) for i in db_chooser.get("slave", [])]
-
-    slave_prefix = "sqlalchemy_slave" if "sqlalchemy_slave.url" in settings else None
-
-    models.DBSession, rw_bind, ro_bind = c2cwsgiutils.db.setup_session(
-        config, "sqlalchemy", slave_prefix, force_master=master_paths, force_slave=slave_paths)
-    models.Base.metadata.bind = rw_bind
-    models.DBSessions["dbsession"] = models.DBSession
-
-    for dbsession_name, dbsession_config in settings.get("dbsessions", {}).items():  # pragma: nocover
-        models.DBSessions[dbsession_name] = \
-            c2cwsgiutils.db.create_session(config, dbsession_name, **dbsession_config)
-
-    # initialize the dbreflection module
-    dbreflection.init()
-
-    if health_check is not None:
-        for name, session in models.DBSessions.items():
-            if name == "dbsession":
-                health_check.add_db_session_check(session, at_least_one_model=main.Theme)
-            else:  # pragma: no cover
-                health_check.add_db_session_check(
-                    session, query_cb=lambda session: session.execute("SELECT 1"))

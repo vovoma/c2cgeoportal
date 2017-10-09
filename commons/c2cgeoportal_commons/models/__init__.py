@@ -28,10 +28,13 @@
 # either expressed or implied, of the FreeBSD Project.
 
 
+import logging
 import sqlalchemy.ext.declarative
 from sqlalchemy.orm import sessionmaker, configure_mappers
 import zope.sqlalchemy
 import c2cgeoportal_commons.models
+
+LOG = logging.getLogger(__name__)
 
 DBSession = None  # Initialized by init_dbsessions
 Base = sqlalchemy.ext.declarative.declarative_base()
@@ -113,22 +116,22 @@ def init_dbsessions(settings, config=None, health_check=None):
 
     slave_prefix = "sqlalchemy_slave" if "sqlalchemy_slave.url" in settings else None
 
-    models.DBSession, rw_bind, ro_bind = c2cwsgiutils.db.setup_session(
+    c2cgeoportal_commons.models.DBSession, rw_bind, ro_bind = c2cwsgiutils.db.setup_session(
         config, "sqlalchemy", slave_prefix, force_master=master_paths, force_slave=slave_paths)
-    models.Base.metadata.bind = rw_bind
-    models.DBSessions["dbsession"] = models.DBSession
+    c2cgeoportal_commons.models.Base.metadata.bind = rw_bind
+    c2cgeoportal_commons.models.DBSessions["dbsession"] = c2cgeoportal_commons.models.DBSession
 
     for dbsession_name, dbsession_config in settings.get("dbsessions", {}).items():  # pragma: nocover
-        models.DBSessions[dbsession_name] = \
+        c2cgeoportal_commons.models.DBSessions[dbsession_name] = \
             c2cwsgiutils.db.create_session(config, dbsession_name, **dbsession_config)
 
-    # initialize the dbreflection module
-    dbreflection.init()
+    from c2cgeoportal_commons.models import main
+
 
     if health_check is not None:
-        for name, session in models.DBSessions.items():
+        for name, session in c2cgeoportal_commons.models.DBSessions.items():
             if name == "dbsession":
-                health_check.add_db_session_check(session, at_least_one_model=models.Theme)
+                health_check.add_db_session_check(session, at_least_one_model=main.Theme)
             else:  # pragma: no cover
                 health_check.add_db_session_check(
                     session, query_cb=lambda session: session.execute("SELECT 1"))
