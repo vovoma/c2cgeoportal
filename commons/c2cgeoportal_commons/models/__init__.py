@@ -33,6 +33,7 @@ import logging
 import sqlalchemy.ext.declarative
 from sqlalchemy.orm import sessionmaker, configure_mappers
 import zope.sqlalchemy
+import c2cwsgiutils
 import c2cgeoportal_commons.models
 
 LOG = logging.getLogger(__name__)
