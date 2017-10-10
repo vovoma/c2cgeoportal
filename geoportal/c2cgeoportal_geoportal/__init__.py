@@ -50,7 +50,7 @@ import c2cwsgiutils.db
 import c2cwsgiutils.pyramid
 from c2cwsgiutils.health_check import HealthCheck
 
-from c2cgeoportal_commons.modules import init_dbsessions
+from c2cgeoportal_commons.models import init_dbsessions
 from c2cgeoportal_geoportal.lib import dbreflection, caching, \
     C2CPregenerator, MultiDomainStaticURLInfo
 
