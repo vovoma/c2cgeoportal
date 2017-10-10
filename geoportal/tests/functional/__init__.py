@@ -50,8 +50,9 @@ def cleanup_db():
     import transaction
     import c2cgeoportal_geoportal.lib
     from c2cgeoportal_commons.models import DBSession
-    from c2cgeoportal_commons.models.main import OGCServer, TreeItem, Role, User, RestrictionArea, \
-        Interface, Functionality, FullTextSearch, Shorturl
+    from c2cgeoportal_commons.models.main import OGCServer, TreeItem, Role, RestrictionArea, \
+        Interface, Functionality, FullTextSearch
+    from c2cgeoportal_commons.models.static import Shorturl, User
 
     transaction.commit()
     for ra in DBSession.query(RestrictionArea).all():
@@ -108,7 +109,7 @@ def setup_common():
 
 
 def teardown_common():
-    from c2cgeoportal_geoportal import models
+    from c2cgeoportal_commons import models
     cleanup_db()
     testing.tearDown()
     functionality.FUNCTIONALITIES_TYPES = None
