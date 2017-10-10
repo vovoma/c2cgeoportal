@@ -105,7 +105,8 @@ jobs:
   - before_script:
     - deactivate
     - sudo apt-get remove --assume-yes --force-yes python-zope.interface
-    - sudo aptitude install --assume-yes tree apache2 libapache2-mod-wsgi-py3 libapache2-mod-fcgid tomcat7 cgi-mapserver python3-netifaces python3-pip python3-virtualenv
+    - sudo aptitude install --assume-yes apache2 libapache2-mod-wsgi-py3 libapache2-mod-fcgid tomcat7
+      cgi-mapserver python3-netifaces python3-pip python3-virtualenv python3-gdal
     - sudo chmod o+rx /var/log/apache2/
     - sudo chmod o+r /var/log/apache2/*.log
 # database for the GeoMapFish application
