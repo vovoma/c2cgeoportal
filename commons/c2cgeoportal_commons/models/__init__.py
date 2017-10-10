@@ -28,6 +28,7 @@
 # either expressed or implied, of the FreeBSD Project.
 
 
+import re
 import logging
 import sqlalchemy.ext.declarative
 from sqlalchemy.orm import sessionmaker, configure_mappers
