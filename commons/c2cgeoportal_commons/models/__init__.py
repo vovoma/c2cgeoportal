@@ -108,10 +108,10 @@ def init_dbsessions(settings, config=None, health_check=None):
     print(c2cgeoportal_commons.models.srid)
     print(c2cgeoportal_commons.models.schema)
 
-    log.warning(schema)
-    log.warning(srid)
-    log.warning(c2cgeoportal_commons.models.schema)
-    log.warning(c2cgeoportal_commons.models.srid)
+    LOG.warning(schema)
+    LOG.warning(srid)
+    LOG.warning(c2cgeoportal_commons.models.schema)
+    LOG.warning(c2cgeoportal_commons.models.srid)
 
     db_chooser = settings.get("db_chooser", {})
     master_paths = [re.compile(i.replace("//", "/")) for i in db_chooser.get("master", [])]
