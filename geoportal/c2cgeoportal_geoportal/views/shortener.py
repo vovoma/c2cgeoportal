@@ -39,7 +39,7 @@ from pyramid.httpexceptions import HTTPFound, HTTPBadRequest, \
 from pyramid.view import view_config
 
 from c2cgeoportal_commons.models import DBSession
-from c2cgeoportal_commons.models.main import Shorturl
+from c2cgeoportal_commons.models.static import Shorturl
 from c2cgeoportal_geoportal.lib.email_ import send_email
 from c2cgeoportal_geoportal.lib.caching import set_common_headers, NO_CACHE
 
