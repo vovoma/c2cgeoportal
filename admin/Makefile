@@ -30,9 +30,12 @@ serve: ${BUILD_DIR}/requirements.timestamp
 	#Run your project.
 	${VENV}/bin/pserve development.ini
 
+.PHONY: modwsgi
+modwsgi: build ${BUILD_DIR}/apache/c2cgeoportal_admin.wsgi ${BUILD_DIR}/apache/apache.conf
+
 ${BUILD_DIR}/venv.timestamp:
 	#Create a Python virtual environment.
-	python3 -m venv ${VENV}
+	virtualenv -p python3 ${VENV}
 	#Upgrade packaging tools.
 	${VENV}/bin/pip install --upgrade pip==9.0.1 setuptools==36.5.0
 	touch $@
@@ -48,3 +51,13 @@ ${BUILD_DIR}/requirements-dev.timestamp: ${BUILD_DIR}/venv.timestamp setup.py
 	#Install the project in editable mode with its testing requirements.
 	${VENV}/bin/pip install -e ".[testing]"
 	touch $@
+
+${BUILD_DIR}/apache/c2cgeoportal_admin.wsgi: apache/c2cgeoportal_admin.wsgi
+	mkdir -p $(dir $@)
+	sed 's#\[DIR\]#$(CURDIR)#' $< > $@
+	chmod 755 $@
+
+${BUILD_DIR}/apache/apache.conf: apache/apache.conf ${BUILD_DIR}/venv.timestamp
+	mkdir -p $(dir $@)
+	sed -e 's#\[PYTHONPATH\]#$(shell ${VENV}/bin/python -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())")#' \
+	-e 's#\[WSGISCRIPT\]#$(abspath ${BUILD_DIR}/apache/{{package}}.wsgi)#' $< > $@
