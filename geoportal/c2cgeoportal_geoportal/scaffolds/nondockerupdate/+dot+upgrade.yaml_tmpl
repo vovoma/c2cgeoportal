@@ -47,6 +47,9 @@ files_to_move:
 - from: setup.py
   to: geoportal/setup.py
   version: 2.3
+- from: testgeomapfish/models.py
+  to: commons/testgeomapfish_commons
+  version: 2.3
 - from: testgeomapfish
   to: geoportal/testgeomapfish_geoportal
   version: 2.3
