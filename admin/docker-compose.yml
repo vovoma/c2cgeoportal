@@ -1,5 +1,8 @@
 version: '2'
 
+volumes:
+  postgresql_data:
+
 services:
   admin:
     image: camptocamp/c2cgeoportal_admin:latest
@@ -17,7 +20,7 @@ services:
       SQL_LOG_LEVEL: DEBUG
       OTHER_LOG_LEVEL: INFO
       DEVELOPMENT: 'true'
-      GUNICORN_PARAMS: '-b :80 --threads 10 --timeout 60 --reload' # only one process in order to get consistent stats
+      GUNICORN_PARAMS: '-b :80 --threads 10 --timeout 60 --reload'
     volumes:
       # overriding code from image for debugging purposes, also with above reload option:
       - ./c2cgeoportal_admin:/app/c2cgeoportal_admin
@@ -32,6 +35,7 @@ services:
     image: camptocamp/postgres:9.6
     volumes:
       - ./docker/postgis.sql:/docker-entrypoint-initdb.d/postgis.sql
+      - postgresql_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: www-data
       POSTGRES_PASSWORD: www-data

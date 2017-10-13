@@ -1,4 +1,4 @@
--e git://github.com/camptocamp/c2cgeoform.git#egg=c2cgeoform
+-e git://github.com/camptocamp/c2cgeoform.git@c58ddce3e4894f5623c7394c28dc1d4243b96e0b#egg=c2cgeoform
 -e ../commons
 plaster_pastedeploy
 psycopg2
