@@ -7,4 +7,11 @@ do
     sleep 1;
 done
 
-initialize_db_main production.ini --force=1
+# wait for PostGIS extension with select count(*) from pg_extension where extname='postgis';
+while [[ $(echo "import sqlalchemy; print(sqlalchemy.create_engine('$SQLALCHEMY_URL').connect().execute(sqlalchemy.sql.text(\"select count(*) from pg_extension where extname='postgis';\")).fetchone()[0]);" | python 2> /dev/null) -ne 1 ]];
+do
+    echo "Waiting for PostGIS extension to be available"
+    sleep 1;
+done
+
+initialize_db_main production.ini
