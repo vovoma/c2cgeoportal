@@ -751,7 +751,7 @@ geoportal-docker: /build/geoportal-docker.timestamp
 	docker build -t $(DOCKER_BASE)-geoportal:$(DOCKER_TAG) --build-arg "GIT_HASH=$(GIT_HASH)" geoportal
 	touch $@
 
-/build/commons-docker.timestamp: $(shell docker-required --path commons) 
+/build/commons-docker.timestamp: $(shell docker-required --path commons)
 	$(PRERULE_CMD)
 	docker build -t $(DOCKER_BASE)-commons:$(DOCKER_TAG) commons
 	touch $@
