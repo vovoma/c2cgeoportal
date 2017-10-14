@@ -759,7 +759,7 @@ geoportal-docker: /build/geoportal-docker.timestamp
 .PHONY: push-docker
 push-docker:
 	docker push $(DOCKER_BASE)-print:$(DOCKER_TAG)
-	docker push $(DOCKER_BASE)-wsgi:$(DOCKER_TAG)
+	docker push $(DOCKER_BASE)-geoportal:$(DOCKER_TAG)
 	docker push $(DOCKER_BASE)-mapserver:$(DOCKER_TAG)
 
 testdb/12-alembic.sql: geoportal/alembic.ini $(shell ls -1 CONST_alembic/main/versions/*.py)
