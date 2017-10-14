@@ -119,7 +119,7 @@ jobs:
     - deactivate
     - sudo apt-get remove --assume-yes --force-yes python-zope.interface
     - sudo aptitude install --assume-yes tree apache2 apache2-dev libapache2-mod-fcgid tomcat7 cgi-mapserver python3-netifaces python3-pip python3-virtualenv
-    - sudo pip install mod_wsgi
+    - sudo python3 -m pip install mod_wsgi
     - sudo mod_wsgi-express install-module
     - find / -name *wsgi*.so
     - echo "LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi-py34.cpython-34m.so" > /tmp/wsgi_express.load
@@ -128,7 +128,7 @@ jobs:
     - sudo service apache2 restart
     - sudo chmod o+rx /var/log/apache2/
     - sudo chmod o+r /var/log/apache2/*.log
-# database for the GeoMapFish application
+    # Database for the GeoMapFish application
     - docker build --tag=camptocamp/c2cgeoportal-gis-db docker/gis-db
     - docker run --env=POSTGRES_USER=www-data --env=POSTGRES_PASSWORD=www-data --env=POSTGRES_DB=geomapfish --publish=5432:5432 --detach camptocamp/c2cgeoportal-gis-db
 #    - sudo service tomcat7 stop
