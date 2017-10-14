@@ -28,7 +28,7 @@ services:
     - 8380:80
 % endif
 
-  wsgi:
+  geoportal:
     image: ${docker_base}-geoportal:${docker_tag}
     ports:
     - 8080:80
