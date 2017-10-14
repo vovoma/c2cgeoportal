@@ -38,7 +38,6 @@ sudo chmod 777 /var/lib/tomcat7/webapps
 
 sudo a2enmod headers
 sudo a2enmod rewrite
-sudo a2enmod wsgi
 sudo a2enmod fcgid
 
 # Minimal build
